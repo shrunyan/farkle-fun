@@ -2,18 +2,22 @@
     display: grid;
     grid-template-rows: 50px 1fr 50px;
     height: calc(100vh - 112px);
+
+    max-width: 600px;
+    margin: 0 auto;
 }
 .DiceBoard header {
-    /* margin: 16px 0; */
+    align-self: center;
 }
 .DiceBoard main {
     display: grid;
-    grid-template-columns: 100px 100px;
+    grid-template-columns: 1fr 1fr;
     grid-gap: 15px;
+    justify-items: center;
+    align-items: center;
+    padding: 0 0 12px 0;
 }
 .DiceBoard footer button {
-    /* margin: 16px 0; */
-
     background-color: green;
     color: white;
     font-size: 18px;

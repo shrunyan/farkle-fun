@@ -1,7 +1,4 @@
 import "./style";
-// import App from './components/app';
-
-// export default App;
 
 import { h, Component } from "preact";
 import { Router } from "preact-router";

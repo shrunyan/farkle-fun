@@ -4,4 +4,9 @@
     width: 100px;
     height: 100px;
     display: inline-block;
+    text-align: center;
+    vertical-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 100px; 
 }

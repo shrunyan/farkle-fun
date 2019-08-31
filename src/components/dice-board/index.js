@@ -4,21 +4,37 @@ import style from "./style";
 import Die from "../die";
 
 export default class DiceBoard extends Component {
-  // Note: `user` comes from the URL, courtesy of our router
-  render() {
+  constructor() {
+    super();
+    this.state = {
+      dice: [0, 0, 0, 0, 0, 0]
+    };
+  }
+
+  roll = () => {
+    const rollResult = this.state.dice.map(_ => {
+      return Math.floor(Math.random() * this.state.dice.length) + 1;
+    });
+
+    // TODO calculate score
+    // const score =
+
+    this.setState({
+      dice: rollResult
+    });
+  };
+
+  render(props, state) {
     return (
       <section class={style.DiceBoard}>
-        <header>PLAYER_NAME</header>
+        <header>PLAYER_NAME: {props.username}</header>
         <main>
-          <Die />
-          <Die />
-          <Die />
-          <Die />
-          <Die />
-          <Die />
+          {state.dice.map((value, i) => {
+            return <Die value={value} />;
+          })}
         </main>
         <footer>
-          <button>Roll Dice</button>
+          <button onClick={this.roll}>Roll Dice</button>
         </footer>
       </section>
     );
