@@ -1,0 +1,7 @@
+.Die {
+    border: 2px solid #000;
+    border-radius: 2px;
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+}

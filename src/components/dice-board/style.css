@@ -1,0 +1,24 @@
+.DiceBoard {
+    display: grid;
+    grid-template-rows: 50px 1fr 50px;
+    height: calc(100vh - 112px);
+}
+.DiceBoard header {
+    /* margin: 16px 0; */
+}
+.DiceBoard main {
+    display: grid;
+    grid-template-columns: 100px 100px;
+    grid-gap: 15px;
+}
+.DiceBoard footer button {
+    /* margin: 16px 0; */
+
+    background-color: green;
+    color: white;
+    font-size: 18px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 3px;
+}
