@@ -34,7 +34,10 @@ export default class DiceBoard extends Component {
           })}
         </main>
         <footer>
-          <button onClick={this.roll}>Roll Dice</button>
+          <button class={style.RollDice} onClick={this.roll}>
+            Roll Dice
+          </button>
+          <button class={style.EndTurn}>End Turn</button>
         </footer>
       </section>
     );

@@ -17,12 +17,23 @@
     align-items: center;
     padding: 0 0 12px 0;
 }
+.DiceBoard footer {
+    display: flex;
+}
 .DiceBoard footer button {
-    background-color: green;
-    color: white;
     font-size: 18px;
-    width: 100%;
     padding: 12px;
     border: none;
     border-radius: 3px;
+}
+.DiceBoard footer .RollDice {
+    background-color: green;
+    color: white;
+    flex: 2;
+    margin-right: 8px;
+}
+.DiceBoard footer .EndTurn {
+    background-color: red;
+    color: white;
+    flex: 1;
 }

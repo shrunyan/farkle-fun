@@ -3,3 +3,33 @@
 	min-height: 100%;
 	width: 100%;
 }
+.home .tagline {
+	font-size: 42px;
+	text-align: center;
+	margin: 25% 0 16px;
+}
+.home h3 {
+	margin: 0 0 15%;
+	text-align: center;
+	font-size: 24px;
+}
+.home .PlayNow {
+	display: block;
+	font-size: 28px;
+	font-weight: bold;
+    padding: 12px;
+    border: none;
+	border-radius: 3px;
+	width: 100%;
+	background-color: green;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+}
+/* .home .rules {
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	font-size: 18px;
+	margin: 10% 0;
+} */

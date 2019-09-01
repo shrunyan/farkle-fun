@@ -6,7 +6,7 @@ const Header = () => (
   <header class={style.header}>
     <h1>
       <Link activeClassName={style.active} href="/">
-        Farkle Fun
+        farkle.fun
       </Link>
     </h1>
     <nav>

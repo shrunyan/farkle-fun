@@ -3,3 +3,14 @@
 	min-height: 100%;
 	width: 100%;
 }
+
+table {
+	display: grid;
+    grid-template-columns: 1fr;
+	grid-gap: 8px;
+}
+table tr {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 8px;
+}
