@@ -2,9 +2,6 @@
     display: grid;
     grid-template-rows: 50px 1fr 50px;
     height: calc(100vh - 112px);
-
-    max-width: 600px;
-    margin: 0 auto;
 }
 .DiceBoard header {
     align-self: center;

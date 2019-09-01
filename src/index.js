@@ -1,7 +1,7 @@
 // process.env.NODE_ENV = "development";
-require("preact/debug");
+// require("preact/debug");
 
-import "./style";
+import style from "./style";
 
 import { h, Component } from "preact";
 import { Router } from "preact-router";
@@ -27,12 +27,14 @@ export default class App extends Component {
     return (
       <div id="app">
         <Header />
-        <Router onChange={this.handleRoute}>
-          <Home path="/" />
-          <Play path="/play" />
-          <Rules path="/rules" />
-          <About path="/about" />
-        </Router>
+        <div class={style.wrap}>
+          <Router onChange={this.handleRoute}>
+            <Home path="/" />
+            <Play path="/play" />
+            <Rules path="/rules" />
+            <About path="/about" />
+          </Router>
+        </div>
       </div>
     );
   }
