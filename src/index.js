@@ -1,3 +1,6 @@
+// process.env.NODE_ENV = "development";
+require("preact/debug");
+
 import "./style";
 
 import { h, Component } from "preact";
