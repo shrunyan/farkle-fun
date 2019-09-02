@@ -80,9 +80,6 @@ export default class Rules extends Component {
           <tr>
             <td>6, 6, 6</td> <td>600 points</td>
           </tr>
-          <tr>
-            <td>1-2-3-4-5-6 </td> <td>3,000 points</td>
-          </tr>
 
           <tr>
             <td>Four of a Kind </td> <td>1,000 points</td>
@@ -102,6 +99,10 @@ export default class Rules extends Component {
           </tr>
           <tr>
             <td>Two sets of Three of a Kind</td> <td>2,500 points</td>
+          </tr>
+
+          <tr>
+            <td>1-2-3-4-5-6 </td> <td>3,000 points</td>
           </tr>
         </table>
 
