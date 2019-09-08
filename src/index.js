@@ -5,14 +5,17 @@ import style from "./style";
 
 import { h, Component } from "preact";
 import { Router } from "preact-router";
+import { Provider } from "unistore/preact";
 
-import Header from "./components/header";
+import store from "./store";
 
 // Code-splitting is automated for routes
 import Home from "./routes/home";
 import Play from "./routes/play";
 import Rules from "./routes/rules";
 import About from "./routes/about";
+
+import Header from "./components/header";
 
 export default class App extends Component {
   /** Gets fired when the route changes.
@@ -25,17 +28,19 @@ export default class App extends Component {
 
   render() {
     return (
-      <div id="app">
-        <Header />
-        <div class={style.wrap}>
-          <Router onChange={this.handleRoute}>
-            <Home path="/" />
-            <Play path="/play" />
-            <Rules path="/rules" />
-            <About path="/about" />
-          </Router>
+      <Provider store={store}>
+        <div id="app">
+          <Header />
+          <div class={style.wrap}>
+            <Router onChange={this.handleRoute}>
+              <Home path="/" />
+              <Play path="/play" />
+              <Rules path="/rules" />
+              <About path="/about" />
+            </Router>
+          </div>
         </div>
-      </div>
+      </Provider>
     );
   }
 }

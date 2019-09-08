@@ -10,3 +10,6 @@
     font-weight: bold;
     line-height: 100px; 
 }
+.Locked {
+    border: 2px solid gainsboro;
+}
