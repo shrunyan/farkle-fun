@@ -1,11 +1,14 @@
 import createStore from "unistore";
 
+// TODO make env var?
 const DICE_COUNT = 6;
+const DICE_SIDES = 6;
+const DICE_INITIAL_VALUE = 1;
 
-let store = createStore({
+export default createStore({
   cup: new Array(DICE_COUNT).fill({
-    sides: 6,
-    value: 1,
+    sides: DICE_SIDES,
+    value: DICE_INITIAL_VALUE,
     locked: false
   }),
   rolls: [],
@@ -13,8 +16,6 @@ let store = createStore({
   started: false,
   score: 0
 });
-
-export default store;
 
 export const actions = store => {
   return {
@@ -30,8 +31,14 @@ export const actions = store => {
           locked: !dice[index].locked
         };
 
+        // Update roll with locked dice
+        const rolls = [...state.rolls];
+        rolls.pop();
+        rolls.push(dice);
+
         store.setState({
-          cup: dice
+          cup: dice,
+          rolls
         });
       }
     },
@@ -39,16 +46,7 @@ export const actions = store => {
     shake: state => {
       console.log("shake", state);
 
-      const dice = state.cup.map(die => {
-        if (!die.locked) {
-          return {
-            ...die,
-            value: Math.floor(Math.random() * die.sides) + 1
-          };
-        } else {
-          return die;
-        }
-      });
+      const dice = roll(state.cup);
 
       store.setState({
         started: true,
@@ -62,7 +60,7 @@ export const actions = store => {
 
       store.setState({
         score: state.rolls.reduce((acc, roll) => {
-          acc = acc + scoreRoll(roll);
+          acc = acc + sum(roll);
           return acc;
         }, 0)
       });
@@ -70,13 +68,25 @@ export const actions = store => {
   };
 };
 
-function scoreRoll(dice) {
+function roll(dice) {
+  return dice.map(die => {
+    if (!die.locked) {
+      return {
+        ...die,
+        value: Math.floor(Math.random() * die.sides) + 1
+      };
+    } else {
+      return die;
+    }
+  });
+}
+
+function sum(dice) {
   let score = 0;
 
   const selected = dice.filter(die => die.locked);
 
-  // Sort default is alphabetical
-  // We provide custom sort function to sort numerically
+  // Order dice by numerical value
   const numericallySorted = selected.sort((a, b) => a.value - b.value);
 
   // Find all die value matches
