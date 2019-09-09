@@ -1,8 +1,6 @@
 // process.env.NODE_ENV = "development";
 // require("preact/debug");
 
-import style from "./style";
-
 import { h, Component } from "preact";
 import { Router } from "preact-router";
 import { Provider } from "unistore/preact";
@@ -17,6 +15,7 @@ import About from "./routes/about";
 
 import Header from "./components/header";
 
+import style from "./style";
 export default class App extends Component {
   /** Gets fired when the route changes.
    *	@param {Object} event		"change" event from [preact-router](http://git.io/preact-router)
@@ -31,14 +30,12 @@ export default class App extends Component {
       <Provider store={store}>
         <div id="app">
           <Header />
-          <div class={style.wrap}>
-            <Router onChange={this.handleRoute}>
-              <Home path="/" />
-              <Play path="/play" />
-              <Rules path="/rules" />
-              <About path="/about" />
-            </Router>
-          </div>
+          <Router onChange={this.handleRoute}>
+            <Home path="/" />
+            <Play path="/play" />
+            <Rules path="/rules" />
+            <About path="/about" />
+          </Router>
         </div>
       </Provider>
     );
