@@ -7,7 +7,7 @@ import Die from "../die";
 
 import style from "./style";
 export default connect(
-  ["score", "cup", "rolls"],
+  ["score", "cup", "players", "current_turn_score", "current_player"],
   actions
 )(props => {
   console.log("dice-board", props);
@@ -15,18 +15,25 @@ export default connect(
   return (
     <section class={style.DiceBoard}>
       <header>
-        PLAYER_NAME: {props.username} {props.score}
+        <table>
+          {props.players.map((player, i) => (
+            <td>
+              {player.name.slice(0, 3)}: {player.score}
+            </td>
+          ))}
+        </table>
+        <h3>Current Score: {props.current_turn_score}</h3>
       </header>
       <main>
-        {props.cup.map((die, i) => {
-          return <Die index={i} {...die} />;
-        })}
+        {props.cup.map((die, i) => (
+          <Die index={i} {...die} />
+        ))}
       </main>
       <footer>
         <button class={style.RollDice} onClick={props.shake}>
           Roll Dice
         </button>
-        <button class={style.EndTurn} onClick={props.tally}>
+        <button class={style.EndTurn} onClick={props.endTurn}>
           End Turn
         </button>
       </footer>

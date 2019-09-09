@@ -3,18 +3,24 @@ import createStore from "unistore";
 // TODO make env var?
 const DICE_COUNT = 6;
 const DICE_SIDES = 6;
-const DICE_INITIAL_VALUE = 1;
+const DICE_INITIAL_VALUE = 0;
+const MAX_SCORE = 10000;
 
 export default createStore({
-  cup: new Array(DICE_COUNT).fill({
-    sides: DICE_SIDES,
-    value: DICE_INITIAL_VALUE,
-    locked: false
-  }),
+  cup: startingDice(),
   rolls: [],
-  players: [],
+  combos: [],
+  players: [
+    {
+      name: "First Player",
+      score: 0,
+      turns: [] // TODO at end of every turn push rolls here
+    }
+  ],
+  current_player: 0, // index in players array
+  current_turn_score: 0,
   started: false,
-  score: 0
+  max_score: MAX_SCORE
 });
 
 export const actions = store => {
@@ -31,14 +37,15 @@ export const actions = store => {
           locked: !dice[index].locked
         };
 
-        // Update roll with locked dice
-        const rolls = [...state.rolls];
-        rolls.pop();
-        rolls.push(dice);
+        // Update current combo with locked dice from the current cup
+        const combos = [...state.combos];
+        combos.pop();
+        combos.push(dice.filter(die => die.locked));
 
         store.setState({
           cup: dice,
-          rolls
+          current_turn_score: tally(combos),
+          combos
         });
       }
     },
@@ -55,18 +62,51 @@ export const actions = store => {
       });
     },
 
-    tally: state => {
-      console.log("tally", state);
+    endTurn: state => {
+      console.log("endTurn", state);
+
+      // determine next player
+      const nextPlayer =
+        state.current_player + 1 > state.players.length - 1
+          ? 0 // go back to player one
+          : state.current_player + 1;
+
+      // save players rolls
+      let players = [...state.players];
+
+      // Tally players total score
+      players[state.current_player].score =
+        players[state.current_player].score + state.current_turn_score;
+
+      // Capture players turn
+      players[state.current_player].turns = [
+        ...players[state.current_player].turns,
+        {
+          rolls: state.rolls,
+          combos: state.combos,
+          score: state.current_turn_score
+        }
+      ];
 
       store.setState({
-        score: state.rolls.reduce((acc, roll) => {
-          acc = acc + sum(roll);
-          return acc;
-        }, 0)
+        cup: startingDice(),
+        rolls: [],
+        combos: [],
+        current_player: nextPlayer,
+        current_turn_score: 0,
+        players
       });
     }
   };
 };
+
+function startingDice(amount, sides, initialValue) {
+  return new Array(DICE_COUNT).fill({
+    sides: DICE_SIDES,
+    value: DICE_INITIAL_VALUE,
+    locked: false
+  });
+}
 
 function roll(dice) {
   return dice.map(die => {
@@ -81,6 +121,16 @@ function roll(dice) {
   });
 }
 
+// Adds up combos into numerical score
+function tally(combos) {
+  return combos.reduce((acc, combo) => {
+    acc = acc + sum(combo);
+    return acc;
+  }, 0);
+}
+
+// Determines a set of dices score
+// Rules engine
 function sum(dice) {
   let score = 0;
 
