@@ -1,0 +1,25 @@
+.Players {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-auto-flow: column;
+    overflow: scroll;
+}
+.Players li {
+    list-style-type: none;
+    padding: 4px 8px;
+}
+.Players li.Active {
+    background-color: #d5cde4;
+    border-radius: 3px;
+}
+.Players .name {
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+.Players .score {
+    color: #333;
+}
