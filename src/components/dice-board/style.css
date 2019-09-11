@@ -1,6 +1,6 @@
 .DiceBoard {
     display: grid;
-    grid-template-rows: 100px 1fr 50px;
+    grid-template-rows: 1fr 50px;
     height: calc(100vh - 56px - 24px);
 }
 .DiceBoard header {
@@ -11,12 +11,51 @@
 }
 .DiceBoard main {
     display: grid;
+    grid-template-rows: 50px 1fr;
+    align-items: center;
+}
+
+.DiceBoard main .Players {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    /* grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); */
+    grid-auto-flow: column;
+    overflow: scroll;
+    /* grid-gap: 0 8px; */
+}
+.DiceBoard main .Players li {
+    list-style-type: none;
+    /* margin: 0 0 8px 0; */
+    padding: 4px 8px;
+}
+.DiceBoard main .Players li.Active {
+    background-color: #d5cde4;
+    border-radius: 3px;
+}
+.DiceBoard main .Players .name {
+    font-weight: bold;
+    /* width: 70px; */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+.DiceBoard main .Players .score {
+    color: #333;
+}
+
+.DiceBoard main .Cup {
+    display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 15px;
+    grid-template-rows: 100px 100px 100px;
+    grid-gap: 10px;
     justify-items: center;
     align-items: center;
-    padding: 0 0 12px 0;
+    /* padding: 0 0 12px 0; */
 }
+
+
 .DiceBoard footer {
     display: flex;
 }

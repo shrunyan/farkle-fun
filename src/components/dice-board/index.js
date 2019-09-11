@@ -1,4 +1,5 @@
-import { h, Component } from "preact";
+import { h } from "preact";
+import { useEffect } from "preact/hooks";
 import { connect } from "unistore/preact";
 
 import { actions } from "../../store";
@@ -12,22 +13,30 @@ export default connect(
 )(props => {
   console.log("dice-board", props);
 
+  useEffect(() => {
+    document.getElementById(`player-${props.current_player}`).scrollIntoView();
+  }, [props.current_player]);
+
   return (
     <section class={style.DiceBoard}>
-      <header>
-        <table>
-          {props.players.map((player, i) => (
-            <td>
-              {player.name.slice(0, 3)}: {player.score}
-            </td>
-          ))}
-        </table>
-        <h3>Current Score: {props.current_turn_score}</h3>
-      </header>
       <main>
-        {props.cup.map((die, i) => (
-          <Die index={i} {...die} />
-        ))}
+        <ul class={style.Players}>
+          {props.players.map((player, i) => (
+            <li
+              id={`player-${i}`}
+              class={props.current_player === i ? style.Active : null}
+              // autofocus={props.current_player === i ? true : false}
+            >
+              <span class={style.name}>{player.name}</span>
+              <span class={style.score}>{player.score}</span>
+            </li>
+          ))}
+        </ul>
+        <div class={style.Cup}>
+          {props.cup.map((die, i) => (
+            <Die index={i} {...die} />
+          ))}
+        </div>
       </main>
       <footer>
         <button class={style.RollDice} onClick={props.shake}>

@@ -12,7 +12,37 @@ export default createStore({
   combos: [],
   players: [
     {
-      name: "First Player",
+      name: "Nicole",
+      score: 0,
+      turns: [] // TODO at end of every turn push rolls here
+    },
+    {
+      name: "Jenna",
+      score: 0,
+      turns: [] // TODO at end of every turn push rolls here
+    },
+    {
+      name: "Christina",
+      score: 0,
+      turns: [] // TODO at end of every turn push rolls here
+    },
+    {
+      name: "Stuart",
+      score: 0,
+      turns: [] // TODO at end of every turn push rolls here
+    },
+    {
+      name: "TEST ONE",
+      score: 0,
+      turns: [] // TODO at end of every turn push rolls here
+    },
+    {
+      name: "TEST Two",
+      score: 0,
+      turns: [] // TODO at end of every turn push rolls here
+    },
+    {
+      name: "TEST Three",
       score: 0,
       turns: [] // TODO at end of every turn push rolls here
     }
