@@ -9,16 +9,22 @@ const Header = () => (
         farkle.fun
       </Link>
     </h1>
+
     <nav>
-      <Link activeClassName={style.active} href="/play">
-        Play
-      </Link>
-      <Link activeClassName={style.active} href="/rules">
-        Rules
-      </Link>
-      <Link activeClassName={style.active} href="/about">
-        About
-      </Link>
+      <div class={style.Icon}>
+        <div></div>
+      </div>
+      <div class={style.Links}>
+        <Link activeClassName={style.active} href="/play">
+          Play
+        </Link>
+        <Link activeClassName={style.active} href="/rules">
+          Rules
+        </Link>
+        <Link activeClassName={style.active} href="/about">
+          About
+        </Link>
+      </div>
     </nav>
   </header>
 );

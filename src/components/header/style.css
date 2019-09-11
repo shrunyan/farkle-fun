@@ -8,10 +8,15 @@
 	background: #673AB7;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 	/* z-index: 50; */
+
+
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .header h1 {
-	float: left;
+	/* float: left; */
 	margin: 0;
 	padding: 0 15px;
 	font-size: 24px;
@@ -20,17 +25,12 @@
 	color: #FFF;
 }
 
-.header nav {
-	float: right;
-	font-size: 100%;
-}
-
 .header a {
-	display: inline-block;
+	display: block;
 	height: 56px;
 	line-height: 56px;
 	padding: 0 15px;
-	min-width: 50px;
+	min-width: 100px;
 	text-align: center;
 	background: rgba(255,255,255,0);
 	text-decoration: none;
@@ -45,4 +45,52 @@
 
 .header a.active {
 	background: rgba(0,0,0,0.4);
+}
+
+nav .Links {
+	/* float: right;
+	font-size: 100%; */
+
+	position: absolute;
+    top: 56px;
+    right: 0;
+	background-color: #673AB7;
+	
+	display: none;
+}
+
+nav:hover .Links,
+nav:active .Links,
+nav:focus .Links {
+	display: block;
+}
+
+nav .Icon {
+	/* margin: 1em; */
+	margin: 17px 35px;
+    width: 30px;
+}
+  
+nav .Icon:after, 
+nav .Icon:before, 
+nav .Icon div {
+	background-color: #fff;
+	border-radius: 3px;
+	content: '';
+	display: block;
+	height: 3px;
+	margin: 7px 0;
+	transition: all .2s ease-in-out;
+}
+
+nav .Icon:hover:before {
+	transform: translateY(10px) rotate(135deg);
+}
+
+nav .Icon:hover:after {
+	transform: translateY(-10px) rotate(-135deg);
+}
+
+nav .Icon:hover div {
+	transform: scale(0);
 }
