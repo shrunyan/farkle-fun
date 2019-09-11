@@ -49,7 +49,6 @@ export default createStore({
   ],
   current_player: 0, // index in players array
   current_turn_score: 0,
-  started: false,
   max_score: MAX_SCORE
 });
 
@@ -60,35 +59,40 @@ export const actions = store => {
 
       // Can't lock dice until they've been rolled
       if (state.rolls.length) {
-        let dice = [...state.cup];
+        let cup = [...state.cup];
 
-        dice[index] = {
-          ...dice[index],
-          locked: !dice[index].locked
+        cup[index] = {
+          ...cup[index],
+          locked: !cup[index].locked
         };
 
-        // Update current combo with locked dice from the current cup
-        const combos = [...state.combos];
-        combos.pop();
-        combos.push(dice.filter(die => die.locked));
-
-        store.setState({
-          cup: dice,
-          current_turn_score: tally(combos),
-          combos
-        });
+        store.setState({ cup });
       }
     },
 
     shake: state => {
       console.log("shake", state);
 
-      const dice = roll(state.cup);
+      let combos = [...state.combos];
+      if (state.rolls.length) {
+        // Make copy so we don't modify in place the state value
+        let rolls = [...state.rolls];
+        let priorRoll = rolls.pop();
+
+        // TODO I think I need to diff prior rol to the cups latest locked die.
+        // But rolls aren't maintaing the index mapping so not sure how that will work
+
+        // Get newly locked die from prior roll
+        combos.push(priorRoll.filter(die => die.locked));
+      }
+
+      const cup = roll(state.cup);
+      const rolledDice = cup.filter(die => !die.locked);
 
       store.setState({
-        started: true,
-        rolls: [...state.rolls, dice],
-        cup: dice
+        rolls: [...state.rolls, [...rolledDice]],
+        combos,
+        cup
       });
     },
 
@@ -101,12 +105,15 @@ export const actions = store => {
           ? 0 // go back to player one
           : state.current_player + 1;
 
+      // Tally score
+      const score = tally(state.combos);
+
       // save players rolls
       let players = [...state.players];
 
       // Tally players total score
       players[state.current_player].score =
-        players[state.current_player].score + state.current_turn_score;
+        players[state.current_player].score + score;
 
       // Capture players turn
       players[state.current_player].turns = [
@@ -114,7 +121,7 @@ export const actions = store => {
         {
           rolls: state.rolls,
           combos: state.combos,
-          score: state.current_turn_score
+          score: score
         }
       ];
 
@@ -123,7 +130,7 @@ export const actions = store => {
         rolls: [],
         combos: [],
         current_player: nextPlayer,
-        current_turn_score: 0,
+        // current_turn_score: 0,
         players
       });
     }
@@ -154,27 +161,28 @@ function roll(dice) {
 // Adds up combos into numerical score
 function tally(combos) {
   return combos.reduce((acc, combo) => {
-    acc = acc + sum(combo);
+    const selected = combo.filter(die => die.locked);
+    const values = selected.map(die => die.value);
+
+    acc = acc + sum(values);
     return acc;
   }, 0);
 }
 
 // Determines a set of dices score
 // Rules engine
-function sum(dice) {
+export function sum(values) {
   let score = 0;
 
-  const selected = dice.filter(die => die.locked);
-
   // Order dice by numerical value
-  const numericallySorted = selected.sort((a, b) => a.value - b.value);
+  const numericallySorted = values.sort((a, b) => a - b);
 
-  // Find all die value matches
-  const matches = numericallySorted.reduce((acc, die) => {
-    if (acc[die.value]) {
-      acc[die.value].count = acc[die.value].count + 1;
+  // Find all value matches
+  const matches = numericallySorted.reduce((acc, value) => {
+    if (acc[value]) {
+      acc[value].count = acc[value].count + 1;
     } else {
-      acc[die.value] = {
+      acc[value] = {
         count: 1
       };
     }
@@ -183,11 +191,11 @@ function sum(dice) {
 
   const matchedDice = Object.keys(matches);
 
-  console.log("matches", matches);
-  console.log("matched key count", matchedDice.length);
+  // console.log("matches", matches);
+  // console.log("matched key count", matchedDice.length);
 
   // Check for flush
-  if (numericallySorted.map(die => die.value).join("-") === "1-2-3-4-5-6") {
+  if (numericallySorted.join("-") === "1-2-3-4-5-6") {
     console.log("flush: 1-2-3-4-5-6");
     score = 3000;
     return score;
@@ -208,7 +216,7 @@ function sum(dice) {
   // 3 sets of 2 of a kind
   // a.k.a triple pair
   if (numericallySorted.length === 6 && matchedDice.length === 3) {
-    let triple = matchedDice.filter(die => matches[die].count === 2);
+    let triple = matchedDice.filter(value => matches[value].count === 2);
     if (triple.length === 3) {
       console.log("triple pair");
       score = 1500;
@@ -217,8 +225,8 @@ function sum(dice) {
   }
 
   // All other cases
-  score = matchedDice.reduce((acc, die, index) => {
-    let count = matches[die].count;
+  score = matchedDice.reduce((acc, value, index) => {
+    let count = matches[value].count;
 
     switch (String(count)) {
       case "6":
@@ -242,7 +250,7 @@ function sum(dice) {
 
       case "3":
         console.log("three of a kind");
-        switch (die) {
+        switch (value) {
           case "6":
             acc += 600;
             break;
@@ -272,20 +280,20 @@ function sum(dice) {
         // handle 1-1 & 5-5 cases where there isn't a triple pair
         // but these would score as 200 & 100 respectively
 
-        if (die == 5) {
+        if (value == 5) {
           acc += 100;
         }
-        if (die == 1) {
+        if (value == 1) {
           acc += 200;
         }
         break;
 
       case "1":
-        console.log("1 or 5 die");
-        if (die == 5) {
+        console.log("1 or 5 die value");
+        if (value == 5) {
           acc += 50;
         }
-        if (die == 1) {
+        if (value == 1) {
           acc += 100;
         }
         break;
@@ -298,7 +306,7 @@ function sum(dice) {
 
     console.table({
       index,
-      die,
+      value,
       count,
       score: acc
     });
