@@ -9,20 +9,13 @@ import style from "./style";
 export default connect(
   [],
   actions
-)((props, state) => {
+)(props => {
   return (
     <div
       class={cx(style.Die, props.locked ? style.Locked : null)}
-      onClick={() => props.lock(props.index)}
+      onClick={() => props.lock(props.die)}
     >
       {props.value}
     </div>
   );
 });
-
-// export default class Die extends Component {
-//   // Note: `user` comes from the URL, courtesy of our router
-//   render({ value }) {
-//     return <div class={style.Die} onClick={props.lock}>{value}</div>;
-//   }
-// }
