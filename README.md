@@ -35,8 +35,9 @@ Another problem I know I'll face and don't have an answer for is; how to determi
 
 - [ ] determine when dice are hot
 - [ ] What happens when a non-scoring dice is selected?
-- [ ] What happens when someone rolls a farkle?
- - [ ] Determine it's a farkle for them and automaticaly end turn?
- - [ ] Let player determine it's a farkle and end turn. When player does so mark as farkle?
+- [x] What happens when someone rolls a farkle?
+ - [x] Determine it's a farkle for them and automaticaly end turn?
+   - [ ] display animated logos on farkle & hot dice
+ - [ ] ~Let player determine it's a farkle and end turn. When player does so mark as farkle?~
 - [x] Display farkle count
  - [ ] Reduce user score by 1000 on 2 farkles and reset farkle count?
