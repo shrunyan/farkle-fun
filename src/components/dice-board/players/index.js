@@ -15,8 +15,15 @@ export default connect(["players", "current_player"])(props => {
           id={`player-${i}`}
           class={props.current_player === i ? style.Active : null}
         >
-          <span class={style.name}>{player.name}</span>
-          <span class={style.score}>{player.score}</span>
+          <ul class={style.farkleCount}>
+            {new Array(player.farkles).fill(1).map(el => (
+              <li>&nbsp;</li>
+            ))}
+          </ul>
+          <span class={style.stats}>
+            <span class={style.name}>{player.name}</span>
+            <span class={style.score}>{player.score}</span>
+          </span>
         </li>
       ))}
     </ul>

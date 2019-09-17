@@ -14,19 +14,19 @@ export default createStore({
       name: "Nicole",
       score: 0,
       turns: [], // TODO at end of every turn push rolls here
-      farkles: 0
+      farkles: 2
     },
     {
       name: "Jenna",
       score: 0,
       turns: [], // TODO at end of every turn push rolls here
-      farkles: 0
+      farkles: 3
     },
     {
       name: "Christina",
       score: 0,
       turns: [], // TODO at end of every turn push rolls here
-      farkles: 0
+      farkles: 1
     },
     {
       name: "Stuart",
