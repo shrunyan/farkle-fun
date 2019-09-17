@@ -34,6 +34,7 @@ Another problem I know I'll face and don't have an answer for is; how to determi
 # TODOS
 
 - [ ] determine when dice are hot
+ - [ ] let player keep rolling
 - [ ] What happens when a non-scoring dice is selected?
 - [x] What happens when someone rolls a farkle?
  - [x] Determine it's a farkle for them and automaticaly end turn?
@@ -41,3 +42,44 @@ Another problem I know I'll face and don't have an answer for is; how to determi
  - [ ] ~Let player determine it's a farkle and end turn. When player does so mark as farkle?~
 - [x] Display farkle count
  - [ ] Reduce user score by 1000 on 2 farkles and reset farkle count?
+- [ ] Add animation for winning match
+
+
+- [ ] Test game variants
+
+Opening Score
+This variant is the same as Farkle, except:
+When the game begins, each player must continue throwing the dice until they have scored at least 500 points or until they Farkle. Once they have reached the 500 points, they are free to continue rolling or end their turn.
+Opening scores of 350, 400, 600, or 1000 points may be used instead of 500.
+ 
+Alternative Winning Score
+This variant is the same as Farkle, except:
+The target score needed to win the game is greater or less than 10,000 (e.g., 20,000 or 5000)
+ 
+Hot Dice Roll
+This variant is the same as Farkle, except:
+A player who scores on all six dice must roll them all again at least once.
+ 
+Three Farkles
+This variant is the same as Farkle, except:
+A player who rolls three Farkles in a row loses 1000 points.
+ 
+Toxic Twos
+This variant is the same as Farkle, except:
+Four or more 2’s thrown in a single roll cancels the player’s entire score for that turn and ends their turn immediately.
+ 
+High Stakes (or Greed)
+This variant is the same as Farkle, except:
+A player may choose to begin their turn by rolling the dice remaining from the previous player’s turn (e.g., those dice that were not set aside for scoring from the previous player’s turn). If the player scores with any of the dice on the first roll, they receive 1000 points in addition to any other points they may accumulate.
+ 
+Welfare
+This variant is the same as Farkle, except:
+A player must score exactly 10,000 points to win the game. If a player scores more than 10,000 points, then all points scored that turn are given to the player with the lowest score.
+ 
+Five Dice Farkle
+This variant is the same as Farkle, except:
+Five dice are used instead of six. (Obviously, certain scoring combinations, such as three pair, are impossible using this variant.)
+ 
+Team Farkle
+This variant is the same as Farkle, except:
+The game is played in teams. Teammates sit opposite each other at the table and combine their scores. The game is typically played to 20,000 points instead of 10,000.
