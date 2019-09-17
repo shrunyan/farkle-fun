@@ -5,6 +5,7 @@ const DICE_COUNT = 6;
 const DICE_SIDES = 6;
 const DICE_INITIAL_VALUE = 0;
 const MAX_SCORE = 10000;
+const BASELINE_SCORE = 500;
 
 export default createStore({
   cup: startingDice(),
@@ -14,19 +15,19 @@ export default createStore({
       name: "Nicole",
       score: 0,
       turns: [], // TODO at end of every turn push rolls here
-      farkles: 2
+      farkles: 0
     },
     {
       name: "Jenna",
       score: 0,
       turns: [], // TODO at end of every turn push rolls here
-      farkles: 3
+      farkles: 0
     },
     {
       name: "Christina",
       score: 0,
       turns: [], // TODO at end of every turn push rolls here
-      farkles: 1
+      farkles: 0
     },
     {
       name: "Stuart",
@@ -103,16 +104,16 @@ export const actions = store => {
           cup
         });
       } else {
-        alert("Farkle");
-        // TODO force end turn and track the farkle count
-
         let players = [...state.players];
 
         // get current player
         let currentPlayer = players[state.current_player];
 
-        // up farkle count
-        currentPlayer.farkles = currentPlayer.farkles + 1;
+        // Player can only farkle when on the board
+        if (currentPlayer.score >= BASELINE_SCORE) {
+          alert("Farkle");
+          currentPlayer.farkles = currentPlayer.farkles + 1;
+        }
 
         // determine next player
         const nextPlayer =
@@ -148,9 +149,9 @@ export const actions = store => {
       let players = [...state.players];
 
       // In order to put points on the board you have land
-      // a role of 500 or greater. Once scored all points
+      // a role of the BASELINE_SCORE or greater. Once scored all points
       // go on the board
-      if (currentPlayer.score || score >= 500) {
+      if (currentPlayer.score || score >= BASELINE_SCORE) {
         currentPlayer.score = currentPlayer.score + score;
       }
 
