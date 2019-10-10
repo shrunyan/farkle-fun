@@ -1,0 +1,6 @@
+.NewGame {}
+
+.NewGame ul li {
+    display: block;
+    margin: 8px;
+}

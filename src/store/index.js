@@ -11,56 +11,69 @@ export default createStore({
   cup: startingDice(),
   combos: [],
   players: [
-    {
-      name: "Nicole",
-      score: 0,
-      turns: [], // TODO at end of every turn push rolls here
-      farkles: 0
-    },
-    {
-      name: "Jenna",
-      score: 0,
-      turns: [], // TODO at end of every turn push rolls here
-      farkles: 0
-    },
-    {
-      name: "Christina",
-      score: 0,
-      turns: [], // TODO at end of every turn push rolls here
-      farkles: 0
-    },
-    {
-      name: "Stuart",
-      score: 0,
-      turns: [], // TODO at end of every turn push rolls here
-      farkles: 0
-    },
-    {
-      name: "TEST ONE",
-      score: 0,
-      turns: [], // TODO at end of every turn push rolls here
-      farkles: 0
-    },
-    {
-      name: "TEST Two",
-      score: 0,
-      turns: [], // TODO at end of every turn push rolls here
-      farkles: 0
-    },
-    {
-      name: "TEST Three",
-      score: 0,
-      turns: [], // TODO at end of every turn push rolls here
-      farkles: 0
-    }
+    // {
+    //   name: "Stuart",
+    //   score: 0,
+    //   turns: [], // TODO at end of every turn push rolls here
+    //   farkles: 0
+    // }
   ],
   current_player: 0, // index in players array
   current_turn_score: 0,
-  max_score: MAX_SCORE
+  max_score: MAX_SCORE,
+  match_started: false
 });
 
 export const actions = store => {
   return {
+    startMatch() {
+      store.setState({
+        match_started: true
+      });
+    },
+
+    endMatch() {
+      store.setState({
+        match_started: false
+      });
+    },
+
+    addSlot(state) {
+      store.setState({
+        players: [
+          ...state.players,
+          {
+            name: null,
+            score: 0,
+            turns: [],
+            farkles: 0
+          }
+        ]
+      });
+    },
+
+    addPlayer(state, evt) {
+      let players = [...state.players];
+      players[evt.target.dataset.index] = {
+        name: evt.target.value,
+        score: 0,
+        turns: [],
+        farkles: 0
+      };
+
+      store.setState({
+        players
+      });
+    },
+
+    removePlayer(state, index) {
+      let players = [...state.players];
+      players.splice(index, 1);
+      store.setState({
+        players
+      });
+    },
+
     lock(state, die) {
       console.log("lock", die);
 

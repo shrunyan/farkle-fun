@@ -11,8 +11,6 @@ export default connect(
   [],
   actions
 )(props => {
-  console.log("dice-board", props);
-
   return (
     <section class={style.DiceBoard}>
       <main>
@@ -25,6 +23,9 @@ export default connect(
         </button>
         <button class={style.EndTurn} onClick={props.endTurn}>
           End Turn
+        </button>
+        <button class={style.EndTurn} onClick={props.endMatch}>
+          End Match
         </button>
       </footer>
     </section>

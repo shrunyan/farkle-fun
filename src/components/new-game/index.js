@@ -1,26 +1,41 @@
 import { h, Component } from "preact";
+import { useState } from "preact/hooks";
+import { connect } from "unistore/preact";
+
+import { actions } from "../../store";
+
 import style from "./style";
 
-export default class NewGame extends Component {
-  constructor() {
-    super();
-    this.state = {
-      players: ["player 1", "player 2"]
-    };
-  }
-  render(props, state) {
-    return (
-      <div class={style.NewGame}>
-        <h1>Add Players</h1>
+export default connect(
+  ["players"],
+  actions
+)(props => {
+  return (
+    <div class={style.NewGame}>
+      <h1>Add Match Players</h1>
 
-        {state.players.map(player => {
-          return <input type="text" value={player} />;
-        })}
-
-        <button>Add another player?</button>
-
-        <button>Start Game</button>
+      <div>
+        <button onClick={props.addSlot}>Add new player</button>
+        {props.players.length >= 2 && (
+          <button onClick={props.startMatch}>Start Game</button>
+        )}
       </div>
-    );
-  }
-}
+
+      <ul>
+        {props.players.map((player, index) => {
+          return (
+            <li>
+              <input
+                type="text"
+                data-index={index}
+                value={player.name}
+                onChange={props.addPlayer}
+              />
+              <button onClick={() => props.removePlayer(index)}>remove</button>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+});

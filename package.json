@@ -15,7 +15,7 @@
     "test:integration": "jest"
   },
   "devDependencies": {
-    "ava": "^2.3.0",
+    "ava": "^2.4.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
     "less": "^3.10.3",
@@ -23,11 +23,11 @@
     "per-env": "^1.0.2",
     "preact-cli": "^2.1.0",
     "preact-render-spy": "^1.2.1",
-    "tap": "^14.6.2"
+    "tap": "^14.6.9"
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "preact": "^10.0.0-rc.3",
+    "preact": "^10.0.0",
     "preact-router": "^3.0.1",
     "unistore": "^3.4.1"
   },
