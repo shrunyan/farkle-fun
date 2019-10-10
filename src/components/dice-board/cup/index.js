@@ -7,8 +7,8 @@ import style from "./style";
 export default connect(["cup"])(props => {
   return (
     <div class={style.Cup}>
-      {props.cup.map((die, i) => (
-        <Die index={i} {...die} />
+      {props.cup.map(die => (
+        <Die {...die} />
       ))}
     </div>
   );

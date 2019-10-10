@@ -7,19 +7,39 @@
 }
 .Players li {
     list-style-type: none;
-    padding: 4px 8px;
+    padding: 4px 14px 4px 4px;
+    margin: 0 4px 0 0;
+    display: flex;
+    flex-direction: row;
 }
 .Players li.Active {
     background-color: #d5cde4;
     border-radius: 3px;
 }
-.Players .name {
+.Players li .farkleCount {
+    width: 8px;
+    list-style-type: none;
+    margin: 0 4px 0 0;
+    padding: 0;
+}
+
+.Players li .farkleCount li {
+    background-color: red;
+    width: 8px;
+    height: 8px;
+    display: block;
+    border-radius: 8px;
+    margin: 3px 0;
+    padding: 0;
+}
+
+.Players .stats .name {
     font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     display: block;
 }
-.Players .score {
+.Players .stats .score {
     color: #333;
 }
