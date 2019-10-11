@@ -43,6 +43,8 @@ Another problem I know I'll face and don't have an answer for is; how to determi
 - [x] Display farkle count
  - [ ] Reduce user score by 1000 on 2 farkles and reset farkle count?
 - [ ] Add animation for winning match
+- [ ] Determine final round when player reaches MAX_SCORE
+  - [ ] end match after final round
 
 
 - [ ] Test game variants
