@@ -5,7 +5,7 @@ export default class Rules extends Component {
   // Note: `user` comes from the URL, courtesy of our router
   render() {
     return (
-      <div class={style.profile}>
+      <div class={style.rules}>
         <h1>Rules</h1>
 
         <p>

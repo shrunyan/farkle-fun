@@ -6,7 +6,7 @@ import style from "./style";
 export default class About extends Component {
   render() {
     return (
-      <div class={style.profile}>
+      <div class={style.about}>
         <h1>About</h1>
         <p>
           Weekend project by{" "}
