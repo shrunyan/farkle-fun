@@ -18,7 +18,7 @@ export default connect(
         <Cup />
       </main>
       <footer>
-        <button class={style.RollDice} onClick={props.shake}>
+        <button class={style.RollDice} onClick={props.roll}>
           Roll Dice
         </button>
         <button class={style.EndTurn} onClick={props.endTurn}>

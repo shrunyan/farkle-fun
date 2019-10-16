@@ -12,10 +12,12 @@ tap.equal(store.sum([6, 6, 6]), 600);
 tap.equal(store.sum([5, 5, 5]), 500);
 
 // Adding up multiple combos
-tap.equal(
-  [[1], [1], [1, 1]].reduce((acc, combo) => {
-    acc = acc + store.sum(combo);
-    return acc;
-  }, 0),
-  400
-);
+// tap.equal(
+//   [[1], [1], [1, 1]].reduce((acc, combo) => {
+//     acc = acc + store.sum(combo);
+//     return acc;
+//   }, 0),
+//   400
+// );
+
+tap.equal(store.tally([[1], [1], [1, 1]]), 400);

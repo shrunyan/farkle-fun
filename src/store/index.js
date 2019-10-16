@@ -75,7 +75,7 @@ export const actions = store => {
     },
 
     lock(state, die) {
-      console.log("lock", die);
+      // console.log("lock die position", die);
 
       // Can't lock dice until they've been rolled
       if (state.combos.length) {
@@ -102,31 +102,70 @@ export const actions = store => {
       }
     },
 
-    shake: state => {
-      console.log("shake", state);
+    roll: state => {
+      console.log("roll", state);
 
-      let cup = roll(state.cup);
+      let cup = shake(state.cup);
       let combos = [...state.combos, []];
+      let currentPlayer = state.players[state.current_player];
 
       let potentialRollScore = sum(
         cup.filter(die => !die.locked).map(die => die.value)
       );
-      if (potentialRollScore) {
+
+      // console.log("potentialRollScore", potentialRollScore);
+
+      // if every die is locked and all combos score then the dice are hot
+      let hotDice = false;
+      let unLocked = cup.filter(die => !die.locked);
+      if (unLocked.length === 0) {
+        // confirm all combos score
+        for (let index = 0; index < state.combos.length; index++) {
+          const combo = state.combos[index];
+          const score = sum(combo);
+
+          console.log("LOOP", score, combo);
+          // If any combo doesn't score then the dice are not hot
+          if (!score) {
+            hotDice = false;
+            break;
+          } else {
+            hotDice = true;
+          }
+        }
+      }
+
+      if (hotDice) {
+        console.log("Dice are hot!");
+
+        // Reset game board and keep same current player
+        store.setState({
+          cup: shake(startingDice()),
+          combos
+        });
+      } else if (potentialRollScore) {
+        // Allow player to select score
         store.setState({
           combos,
           cup
         });
       } else {
-        let players = [...state.players];
-
-        // get current player
-        let currentPlayer = players[state.current_player];
+        // Player roll has no score potential so turn is over.
 
         // Player can only farkle when on the board
         if (currentPlayer.score >= BASELINE_SCORE) {
           alert("Farkle");
           currentPlayer.farkles = currentPlayer.farkles + 1;
         }
+
+        // Capture players turn
+        // currentPlayer.turns = [
+        //   ...currentPlayer.turns,
+        //   {
+        //     combos: state.combos,
+        //     score: score
+        //   }
+        // ];
 
         // determine next player
         const nextPlayer =
@@ -138,8 +177,7 @@ export const actions = store => {
         store.setState({
           cup: startingDice(),
           combos: [],
-          current_player: nextPlayer,
-          players
+          current_player: nextPlayer
         });
       }
     },
@@ -159,7 +197,7 @@ export const actions = store => {
       const score = tally(state.combos);
 
       // save players rolls
-      let players = [...state.players];
+      // let players = [...state.players];
 
       // In order to put points on the board you have land
       // a role of the BASELINE_SCORE or greater. Once scored all points
@@ -184,8 +222,8 @@ export const actions = store => {
       store.setState({
         cup: startingDice(),
         combos: [],
-        current_player: nextPlayer,
-        players
+        current_player: nextPlayer
+        // players
       });
     }
   };
@@ -202,7 +240,7 @@ function startingDice(amount, sides, initialValue) {
   });
 }
 
-function roll(dice) {
+function shake(dice) {
   return dice.map(die => {
     if (!die.locked) {
       return {
@@ -216,7 +254,7 @@ function roll(dice) {
 }
 
 // Adds up combos into numerical score
-function tally(combos) {
+export function tally(combos) {
   return combos.reduce((acc, combo) => {
     const selected = combo.filter(die => die.locked);
     const values = selected.map(die => die.value);
@@ -229,6 +267,8 @@ function tally(combos) {
 // Determines a set of dices score
 // Rules engine
 export function sum(values) {
+  console.log("sum", values);
+
   let score = 0;
 
   // Order dice by numerical value
@@ -248,13 +288,14 @@ export function sum(values) {
 
   const matchedDice = Object.keys(matches);
 
-  // Check for flush
+  // Edge Case: flush
   if (numericallySorted.join("-") === "1-2-3-4-5-6") {
     console.log("flush: 1-2-3-4-5-6");
     score = 3000;
     return score;
   }
 
+  // Edge Case: double triple
   // 2 sets of 3 of a kind
   // If we were given a full set of dice and there are only 2 match groups
   if (numericallySorted.length === 6 && matchedDice.length === 2) {
@@ -267,8 +308,8 @@ export function sum(values) {
     }
   }
 
+  // Edge Case: triple pair
   // 3 sets of 2 of a kind
-  // a.k.a triple pair
   if (numericallySorted.length === 6 && matchedDice.length === 3) {
     let triple = matchedDice.filter(value => matches[value].count === 2);
     if (triple.length === 3) {
@@ -284,7 +325,9 @@ export function sum(values) {
 
     switch (String(count)) {
       case "6":
-        console.log("six of a kind");
+        // BUG currently selecting 6 die regardless of their kind triggers a 6 of a kind match
+        // TODO confirm the 6 are of the same kind
+        console.log("six of a kind", count, matches);
         acc += 3000;
         break;
 
@@ -327,27 +370,32 @@ export function sum(values) {
         break;
 
       case "2":
-        console.log("1 & 5 pairs");
-
-        // NOTE: triple pairs are handled by the preceding edge case check
+        // NOTE: triple pairs are handled by the "tiple pair" edge case
 
         // handle 1-1 & 5-5 cases where there isn't a triple pair
         // but these would score as 200 & 100 respectively
 
         if (value == 5) {
+          console.log("5 pair");
+
           acc += 100;
         }
         if (value == 1) {
+          console.log("1 pairs");
+
           acc += 200;
         }
         break;
 
       case "1":
-        console.log("1 or 5 die value");
         if (value == 5) {
+          console.log("one 5 die value");
+
           acc += 50;
         }
         if (value == 1) {
+          console.log("one 1 die value");
+
           acc += 100;
         }
         break;
