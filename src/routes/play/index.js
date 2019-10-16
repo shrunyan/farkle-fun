@@ -1,11 +1,10 @@
-import { h, Component } from "preact";
+import { h } from "preact";
 import { connect } from "unistore/preact";
-
-import style from "./style";
 
 import DiceBoard from "../../components/dice-board";
 import NewGame from "../../components/new-game";
 
+import style from "./style";
 export default connect(["match_started"])(props => {
   return (
     <div class={style.play}>
@@ -13,9 +12,3 @@ export default connect(["match_started"])(props => {
     </div>
   );
 });
-
-// export default class Play extends Component {
-//   render() {
-
-//   }
-// }

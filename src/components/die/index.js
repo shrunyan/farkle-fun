@@ -1,11 +1,10 @@
-import { h, Component } from "preact";
+import { h } from "preact";
 import { connect } from "unistore/preact";
 import cx from "classnames";
 
 import { actions } from "../../store";
 
 import style from "./style";
-
 export default connect(
   [],
   actions

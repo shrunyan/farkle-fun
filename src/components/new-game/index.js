@@ -1,11 +1,9 @@
-import { h, Component } from "preact";
-import { useState } from "preact/hooks";
+import { h } from "preact";
 import { connect } from "unistore/preact";
 
 import { actions } from "../../store";
 
 import style from "./style";
-
 export default connect(
   ["players"],
   actions

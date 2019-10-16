@@ -15,7 +15,6 @@ import About from "./routes/about";
 
 import Header from "./components/header";
 
-import style from "./style";
 export default class App extends Component {
   /** Gets fired when the route changes.
    *	@param {Object} event		"change" event from [preact-router](http://git.io/preact-router)

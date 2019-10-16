@@ -11,10 +11,6 @@ const Home = () => (
     <Link class={style.PlayNow} href="/play">
       Play Now!
     </Link>
-
-    {/* <Link class={style.rules} href="/rules">
-      Learn the rules
-    </Link> */}
   </div>
 );
 
