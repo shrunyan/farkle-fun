@@ -4,8 +4,13 @@ import { connect } from "unistore/preact";
 
 import style from "./style";
 export default connect(["players", "current_player"])(props => {
+  console.log("players");
+
   useEffect(() => {
-    document.getElementById(`player-${props.current_player}`).scrollIntoView();
+    const player = document.getElementById(`player-${props.current_player}`);
+    if (player) {
+      player.scrollIntoView();
+    }
   }, [props.current_player]);
 
   return (

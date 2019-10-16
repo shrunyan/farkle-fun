@@ -11,6 +11,8 @@ export default connect(
   [],
   actions
 )(props => {
+  console.log("DiceBoard");
+
   return (
     <section class={style.DiceBoard}>
       <main>

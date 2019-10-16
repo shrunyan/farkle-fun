@@ -10,6 +10,8 @@ export default connect(
   ["players"],
   actions
 )(props => {
+  console.log("NewGame");
+
   return (
     <div class={style.NewGame}>
       <h1>Add Match Players</h1>

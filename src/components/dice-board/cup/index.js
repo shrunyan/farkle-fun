@@ -5,6 +5,8 @@ import Die from "../../die";
 
 import style from "./style";
 export default connect(["cup"])(props => {
+  console.log("cup");
+
   return (
     <div class={style.Cup}>
       {props.cup.map(die => (
