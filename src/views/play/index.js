@@ -1,4 +1,4 @@
-import { h, Component } from "preact";
+import { h } from "preact";
 import { connect } from "unistore/preact";
 
 import style from "./style";
@@ -13,9 +13,3 @@ export default connect(["match_started"])(props => {
     </div>
   );
 });
-
-// export default class Play extends Component {
-//   render() {
-
-//   }
-// }
