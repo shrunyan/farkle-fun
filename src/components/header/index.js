@@ -6,6 +6,10 @@ const Header = () => (
   <header class={style.header}>
     <h1>
       <Link activeClassName={style.active} href="/">
+        <img
+          src="/assets/icons/white/streamline-icon-board-game-dice-1@24x24.png"
+          alt="Add a player"
+        />
         farkle.fun
       </Link>
     </h1>

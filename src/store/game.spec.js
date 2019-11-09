@@ -20,4 +20,4 @@ tap.equal(store.sum([5, 5, 5]), 500);
 //   400
 // );
 
-tap.equal(store.tally([[1], [1], [1, 1]]), 400);
+// tap.equal(store.tally([[1], [1], [1, 1]]), 400);

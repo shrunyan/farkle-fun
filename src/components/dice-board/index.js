@@ -3,6 +3,7 @@ import { connect } from "unistore/preact";
 
 import { actions } from "../../store";
 
+import Button from "../button";
 import Players from "./players";
 import Cup from "./cup";
 
@@ -18,15 +19,17 @@ export default connect(
         <Cup />
       </main>
       <footer>
-        <button class={style.RollDice} onClick={props.roll}>
-          Roll Dice
-        </button>
-        <button class={style.EndTurn} onClick={props.endTurn}>
-          End Turn
-        </button>
-        <button class={style.EndTurn} onClick={props.endMatch}>
-          End Match
-        </button>
+        <Button kind="primary" class={style.RollDice} onClick={props.roll}>
+          <img src="/assets/icons/white/streamline-icon-board-game-dice-1@24x24.png" />
+          Roll
+        </Button>
+        <Button kind="" onClick={props.endTurn}>
+          <img src="/assets/icons/white/streamline-icon-button-next@24x24.png" />
+          Next Player
+        </Button>
+        <Button kind="warn" onClick={props.endMatch}>
+          <img src="/assets/icons/white/streamline-icon-button-stop@24x24.png" />
+        </Button>
       </footer>
     </section>
   );

@@ -1,6 +1,24 @@
-.NewGame {}
-
+.NewGame {
+    /* display: flex;
+    flex-direction: column; */
+}
+.NewGame .actions {
+    display: flex;
+    justify-content: space-between;
+}
+.NewGame .actions button:first-child {
+    flex: 1;
+    margin-right: 8px;
+}
+/* .NewGame main {
+    flex: 1;
+} */
 .NewGame ul li {
     display: block;
-    margin: 8px;
+    margin: 18px 0;
+    display: flex;
+}
+.NewGame ul li input {
+    flex: 1;
+    margin-right: 8px;
 }
