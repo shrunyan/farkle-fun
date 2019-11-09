@@ -5,8 +5,8 @@ import style from "./style";
 
 const Home = () => (
   <div class={style.home}>
-    <h2 class={style.tagline}>A dice game</h2>
-    <h3>Find a few friends and get started.</h3>
+    <h2 class={style.title}>A dice game</h2>
+    <h3 class={style.tagline}>Find a few friends and get started.</h3>
 
     <Link class={style.PlayNow} href="/play">
       Play Now!

@@ -17,21 +17,23 @@
 
 .DiceBoard footer {
     display: flex;
+    justify-content: space-between;
+    gap: 8px;
 }
-.DiceBoard footer button {
-    font-size: 18px;
-    padding: 12px;
-    border: none;
-    border-radius: 3px;
-}
-.DiceBoard footer .RollDice {
-    background-color: green;
-    color: white;
-    flex: 2;
+.DiceBoard footer button:first-child {
     margin-right: 8px;
 }
-.DiceBoard footer .EndTurn {
+.DiceBoard footer button:last-child {
+    margin-left: 8px;;
+}
+.DiceBoard footer .RollDice {
+    /* background-color: green; */
+    /* color: white; */
+    flex: 2;
+    /* margin-right: 8px; */
+}
+/* .DiceBoard footer .EndTurn {
     background-color: red;
     color: white;
     flex: 1;
-}
+} */
