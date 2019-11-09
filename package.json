@@ -7,12 +7,13 @@
     "start": "per-env",
     "start:production": "npm run -s serve",
     "start:development": "npm run -s dev",
-    "build": "preact build",
-    "serve": "preact build && preact serve",
-    "dev": "preact watch",
+    "build": "npx preact build --no-prerender",
+    "serve": "npx preact build --no-prerender && npx preact serve",
+    "dev": "npx preact watch",
     "lint": "eslint src",
+    "test": "npm run test:unit && npm run test:integration",
     "test:unit": "npx tap src/store",
-    "test:integration": "jest"
+    "test:integration": "npx jest"
   },
   "devDependencies": {
     "ava": "^2.4.0",
