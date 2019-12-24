@@ -13,7 +13,7 @@ export default connect(
   return (
     <section class={style.NewGame}>
       <header>
-        <h1>Add Match Players</h1>
+        {/* <h1>Add Match Players</h1> */}
 
         <div class={style.actions}>
           <Button onClick={props.addSlot}>
