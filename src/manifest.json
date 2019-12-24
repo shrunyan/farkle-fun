@@ -1,6 +1,6 @@
 {
-  "name": "farkle-fun",
-  "short_name": "farkle-fun",
+  "name": "Farkle Fun",
+  "short_name": "Farkle Fun",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
