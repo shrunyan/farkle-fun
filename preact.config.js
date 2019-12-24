@@ -1,18 +1,16 @@
-// const preactCliPostCSS = require("preact-cli-postcss");
+/**
+ * Trying to get purgecss to work with tailwind as described here
+ * https://blog.agney.dev/preact-cli-with-typescript/
+ *
+ * It ends up stripping all the tailwind styles
+ */
 
-const tailwind = require("preact-cli-tailwind");
-const tailwindPlugin = (config, env, helpers) => {
-  config = tailwind(config, env, helpers);
+module.exports = (config, env, helpers) => {
+  const postCssLoaders = helpers.getLoadersByName(config, "postcss-loader");
+  postCssLoaders.forEach(({ loader }) => {
+    const plugins = loader.options.plugins;
+    // Add tailwind css at the top.
+    plugins.unshift(require("tailwindcss"));
+  });
   return config;
 };
-
-export default function(config, env, helpers) {
-  // Use postcss.config.js instead of default postCSS config
-  // preactCliPostCSS(config, helpers);
-  tailwindPlugin(config, env, helpers);
-
-  // Run styles through purgeCSS for production only
-  // if (env.production) {
-  //   // config.plugins.push(purgeCssPlugin);
-  // }
-}

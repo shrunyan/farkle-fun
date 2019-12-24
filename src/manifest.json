@@ -1,6 +1,7 @@
 {
   "name": "Farkle Fun",
   "short_name": "Farkle Fun",
+  "description": "Local multiplayer dice game application",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
@@ -8,14 +9,9 @@
   "theme_color": "#673ab8",
   "icons": [
     {
-      "src": "/assets/icons/android-chrome-192x192.png",
+      "src": "/assets/favicon.png",
       "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "/assets/icons/android-chrome-512x512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "24x24"
     }
   ]
 }
